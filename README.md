@@ -20,7 +20,13 @@ making it more appealing while keeping if fair for other players!
 
 ![](https://github.com/MasUnoYT/maseffects/blob/mas-effects-1.21.1/.github/images/totem.png?raw=true)
 
-
 - Mace Smash Shockwave Effect
 
 ![](https://github.com/MasUnoYT/maseffects/blob/mas-effects-1.21.1/.github/images/shockwave.png?raw=true)
+
+## Incoming Features:
+
+- Player Death Effect
+- Ender Pearl Trail Effect
+- Mace Sound Effect
+- Better Hitbox Display
