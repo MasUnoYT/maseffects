@@ -1,9 +1,9 @@
 {
-	"required": true,
+	"required": false,
 	"package": "net.masuno.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -16,6 +16,7 @@ public class MasConfig {
 
     private static KeyBinding ConfigKey;
     public static boolean MaceShockwave = true;
+    public static float MaceShockwaveSize = 1F;
     public static boolean MaceSpark = true;
     public static boolean MaceFlash = true;
     public static boolean ShieldEffect = true;
@@ -54,6 +55,10 @@ public class MasConfig {
         mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.shockwave"),MaceShockwave)
                 .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.shockwave_tooltip"))
                 .setSaveConsumer(newValue -> MaceShockwave = newValue).build());
+
+        mace.addEntry(entryBuilder.startFloatField(Text.translatable("option.maseffects.shockwave_size"),MaceShockwaveSize)
+                .setDefaultValue(1F).setTooltip(Text.translatable("option.maseffects.shockwave_size_tooltip"))
+                .setSaveConsumer(newValue -> MaceShockwaveSize = newValue).build());
 
         mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.spark"),MaceSpark)
                 .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.spark_tooltip"))

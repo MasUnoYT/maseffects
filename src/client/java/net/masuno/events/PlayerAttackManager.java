@@ -46,8 +46,8 @@ public class PlayerAttackManager {
 
         if (MasConfig.MaceShockwave){
             //Spawn two shock-waves (small and big)
-            world.addParticle(ModParticles.SMASH,x,y,z,0.8d,0.8d,2);
-            world.addParticle(ModParticles.SMASH,x,y,z,0.4d,1d,0.5);
+            world.addParticle(ModParticles.SMASH,x,y,z,0.8d,0.8d,1.5 * MasConfig.MaceShockwaveSize);
+            world.addParticle(ModParticles.SMASH,x,y,z,0.4d,1d,0.35 * MasConfig.MaceShockwaveSize);
         }
 
         if (MasConfig.MaceSpark){

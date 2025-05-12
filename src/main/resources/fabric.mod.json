@@ -20,6 +20,9 @@
 		],
 		"client": [
 			"net.masuno.MasEffectsClient"
+		],
+		"modmenu": [
+			"net.masuno.config.ModMenuImplementation"
 		]
 	},
 	"mixins": [

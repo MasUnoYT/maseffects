@@ -2,6 +2,8 @@
   "category.maseffects.mace": "Mace Config",
   "option.maseffects.shockwave": "Mace Shockwave",
   "option.maseffects.shockwave_tooltip" : "Creates a shockwave effect when slamming with the Mace",
+  "option.maseffects.shockwave_size": "Shockwave Size",
+  "option.maseffects.shockwave_size_tooltip" : "Sets the shockwave size (Default is 1)",
   "option.maseffects.spark": "Mace Sparks",
   "option.maseffects.spark_tooltip": "Creates metal sparks when slamming with the mace",
   "option.maseffects.flash": "Mace Flash",
