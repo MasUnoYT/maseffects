@@ -23,6 +23,7 @@ public class MasConfig {
     public static boolean CustomTotemEffect = true;
 
     public static void Register(){
+        //Register keybind to open the config menu
         ConfigKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.maseffects.config",
                 InputUtil.Type.KEYSYM,
@@ -30,8 +31,10 @@ public class MasConfig {
                 "category.maseffects"
         ));
 
+        //Check for every tick if the key was pressed
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (ConfigKey.wasPressed()) {
+                //Open the config by setting the screen to ConfigScreen
                 Screen configScreen = getConfigScreen();
                 if (MinecraftClient.getInstance().currentScreen != configScreen) MinecraftClient.getInstance().setScreen(configScreen);
             }
@@ -39,6 +42,7 @@ public class MasConfig {
 
     }
 
+    //Generate the config screen
     public static Screen getConfigScreen(){
         ConfigBuilder result = ConfigBuilder.create()
             .setParentScreen(MinecraftClient.getInstance().currentScreen)

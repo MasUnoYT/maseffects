@@ -5,7 +5,7 @@ import net.masuno.particles.ModParticles;
 import net.minecraft.entity.Entity;
 
 public class TotemEvent {
-
+    //Runs the on totem code
     public static void run(Entity popper) {
         if (!MasConfig.CustomTotemEffect){
             return;

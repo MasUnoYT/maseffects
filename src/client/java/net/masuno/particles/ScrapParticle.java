@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class ScrapParticle extends SpriteBillboardParticle {
+    //The particle that spawns when the entity you hit with the mace has armor
     public ScrapParticle(ClientWorld clientWorld, double x, double y, double z,
                          SpriteProvider spriteProvider, double xSpeed, double ySpeed, double zSpeed ) {
         super(clientWorld, x, y, z,xSpeed,ySpeed,zSpeed);
@@ -22,6 +23,7 @@ public class ScrapParticle extends SpriteBillboardParticle {
     @Override
     public void tick(){
         super.tick();
+        //make the particle disappear after a while.
         this.scale = (1F - ((float) this.age / this.maxAge)) * 0.35F;
     }
 

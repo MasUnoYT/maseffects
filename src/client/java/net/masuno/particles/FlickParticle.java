@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class FlickParticle extends SpriteBillboardParticle {
+    //The flick particle that spawns when you slam with the mace
     public FlickParticle(ClientWorld clientWorld, double x, double y, double z,
                          SpriteProvider spriteProvider, double xSpeed, double ySpeed, double zSpeed ) {
         super(clientWorld, x, y, z,xSpeed,ySpeed,zSpeed);
@@ -22,8 +23,8 @@ public class FlickParticle extends SpriteBillboardParticle {
     }
 
 
-    public float time;
-    public float scaler;
+    public float time; //Controls the math behind the particles opacity (alpha)
+    public float scaler; //Controls the math behind the particle scale
 
     @Override
     public void tick(){

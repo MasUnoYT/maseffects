@@ -13,15 +13,32 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class ModParticles {
+    //Registers mod particles
 
+
+    //Mace hit shockwave
     public static final SimpleParticleType SMASH = FabricParticleTypes.simple();
+
+    //Mace hit spark
     public static final SimpleParticleType FLICK = FabricParticleTypes.simple();
+
+    //Mace hit flash
     public static final SimpleParticleType FLASH = FabricParticleTypes.simple();
+
+    //Mace hit armor effect for diamond pieces
     public static final SimpleParticleType DIAMOND_SCRAP = FabricParticleTypes.simple();
+
+    //Mace hit armor effect for netherite pieces
     public static final SimpleParticleType NETHERITE_SCRAP = FabricParticleTypes.simple();
+
+    //Totem ring particle
     public static final SimpleParticleType REVIVE = FabricParticleTypes.simple();
+
+    //Totem spark particle
     public static final SimpleParticleType REVIVE_SPARK = FabricParticleTypes.simple();
 
+
+    //Register each particle
     public static void Register(){
 
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "smash"), SMASH);

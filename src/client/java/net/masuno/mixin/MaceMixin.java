@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ParticleUtil.class)
 public abstract class MaceMixin {
+
+    //Calls the mace effects whenever the client world spawns the default mace particles
     @Inject(method = "spawnSmashAttackParticles",at = @At(value = "HEAD"))
     private static void MaceAttack(WorldAccess world, BlockPos pos, int count, CallbackInfo ci){
         Vec3d vec = pos.toCenterPos().add(0.0, 0.5, 0.0);

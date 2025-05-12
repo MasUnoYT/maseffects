@@ -16,6 +16,7 @@ public abstract class TotemParticleMixin extends AnimatedParticle {
         super(world, x, y, z, spriteProvider, upwardsAcceleration);
     }
 
+    //Removes the default totem particle if the custom totem particles are enabled
     @Inject(method = "<init>",at= @At(value = "TAIL"))
     private void injectAlpha(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider, CallbackInfo ci){
         if (MasConfig.CustomTotemEffect){

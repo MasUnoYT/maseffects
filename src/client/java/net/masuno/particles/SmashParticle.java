@@ -15,15 +15,24 @@ import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class SmashParticle extends SpriteBillboardParticle {
+    //make the mace shockwave particle
+
+    //Saves the up rotation (It's always the same)
     private static final Quaternionf QUATERNION = new Quaternionf(0F, -0.7F, 0.7F, 0F);
     public SmashParticle(ClientWorld clientWorld, double x, double y, double z,
                          SpriteProvider spriteProvider, double xSpeed, double ySpeed, double zSpeed ) {
         super(clientWorld, x, y, z,xSpeed,ySpeed,zSpeed);
+
+        //Sets the base scale of the shockwave using the xSpeed argument
         this.scaler = (float) xSpeed;
+
+        //Sets the base opacity of the shockwave using the ySpeed argument
         this.alpha = (float) ySpeed;
         this.scale = 0.5F;
         this.maxAge = 40;
         this.velocityMultiplier = 0;
+
+        //Sets the growth speed of the shockwave using the zSpeed argument
         this.sizer = (float) zSpeed;
         this.setSpriteForAge(spriteProvider);
 
@@ -31,13 +40,13 @@ public class SmashParticle extends SpriteBillboardParticle {
 
     @Override
     public void buildGeometry(VertexConsumer buffer, Camera camera, float ticks){
+        //Displays the particle (both faces, up and down) using the "QUATERNION" rotation
         Vec3d vec3 = camera.getPos();
         float x = (float) (MathHelper.lerp(ticks, this.prevPosX, this.x) - vec3.getX());
         float y = (float) (MathHelper.lerp(ticks, this.prevPosY, this.y) - vec3.getY());
         float z = (float) (MathHelper.lerp(ticks, this.prevPosZ, this.z) - vec3.getZ());
 
         Vector3f[] vector3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-        // Additional vertices for underside faces
         Vector3f[] vector3fsBottom = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, -1.0F, 0.0F)};
 
         float f4 = this.getSize(ticks);
@@ -48,11 +57,10 @@ public class SmashParticle extends SpriteBillboardParticle {
             vector3f.mul(f4);
             vector3f.add(x, y, z);
 
-            // Create additional vertices for underside faces
             Vector3f vector3fBottom = vector3fsBottom[i];
             vector3fBottom.rotate(QUATERNION);
             vector3fBottom.mul(f4);
-            vector3fBottom.add(x, y - 0.1F, z); // Slightly lower to avoid z-fighting
+            vector3fBottom.add(x, y - 0.1F, z);
         }
 
         float f7 = this.getMinU();
@@ -78,6 +86,7 @@ public class SmashParticle extends SpriteBillboardParticle {
     @Override
     public void tick(){
         super.tick();
+        //Makes the shockwave grow overtime
         this.scale += scaler * sizer;
         scaler -= 1F / this.maxAge;
 
