@@ -1,0 +1,16 @@
+{
+  "category.maseffects.mace": "Mace Config",
+  "option.maseffects.shockwave": "Mace Shockwave",
+  "option.maseffects.shockwave_tooltip" : "Creates a shockwave effect when slamming with the Mace",
+  "option.maseffects.spark": "Mace Sparks",
+  "option.maseffects.spark_tooltip": "Creates metal sparks when slamming with the mace",
+  "option.maseffects.flash": "Mace Flash",
+  "option.maseffects.flash_tooltip": "Creates a flash effect when slamming with the mace",
+  "option.maseffects.armor": "Breach Armor Particles",
+  "option.maseffects.armor_tooltip": "Creates an armor breaking effect when using breach",
+  "category.maseffects.generic": "Generic Config",
+  "option.maseffects.totem": "Totem Effect",
+  "option.maseffects.totem_tooltip": "Replaces totem particles with custom ones",
+  "option.maseffects.mace_shield" : "Mace Shield Block",
+  "option.maseffects.mace_shield_tooltip": "Shielding a Mace attack will create a shockwave"
+}

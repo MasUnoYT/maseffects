@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.masuno.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "TotemMixin",
+    "TotemParticleMixin",
+    "MaceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+  ]
+}
