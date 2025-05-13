@@ -1,11 +1,13 @@
 package net.masuno.particles;
 
+import com.sun.source.tree.LambdaExpressionTree;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.masuno.MasEffectsClient;
 import net.minecraft.client.particle.FireworksSparkParticle;
+import net.minecraft.particle.EntityEffectParticleEffect;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -40,6 +42,9 @@ public class ModParticles {
     //Totem spark particle
     public static final SimpleParticleType SHIELD_WAVE = FabricParticleTypes.simple();
 
+    public static final SimpleParticleType DEATH_SPARK = FabricParticleTypes.simple();
+    public static final SimpleParticleType DEATH_SKULL = FabricParticleTypes.simple();
+
 
     //Register each particle
     public static void Register(){
@@ -52,6 +57,8 @@ public class ModParticles {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "revive"), REVIVE);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "revive_spark"), REVIVE_SPARK);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "shield_wave"), SHIELD_WAVE);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "death_spark"), DEATH_SPARK);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "death_skull"), DEATH_SKULL);
 
         ParticleFactoryRegistry.getInstance().register(SMASH, SmashParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(FLICK, FlickParticle.Factory::new);
@@ -61,5 +68,7 @@ public class ModParticles {
         ParticleFactoryRegistry.getInstance().register(REVIVE, ReviveParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(REVIVE_SPARK, ReviveSparkParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(SHIELD_WAVE, ShieldWave.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(DEATH_SPARK, DeathSpark.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(DEATH_SKULL, DeathSkull.Factory::new);
     }
 }
