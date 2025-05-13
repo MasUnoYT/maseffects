@@ -37,6 +37,9 @@ public class ModParticles {
     //Totem spark particle
     public static final SimpleParticleType REVIVE_SPARK = FabricParticleTypes.simple();
 
+    //Totem spark particle
+    public static final SimpleParticleType SHIELD_WAVE = FabricParticleTypes.simple();
+
 
     //Register each particle
     public static void Register(){
@@ -48,6 +51,7 @@ public class ModParticles {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "netherite_scrap"), NETHERITE_SCRAP);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "revive"), REVIVE);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "revive_spark"), REVIVE_SPARK);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "shield_wave"), SHIELD_WAVE);
 
         ParticleFactoryRegistry.getInstance().register(SMASH, SmashParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(FLICK, FlickParticle.Factory::new);
@@ -56,5 +60,6 @@ public class ModParticles {
         ParticleFactoryRegistry.getInstance().register(NETHERITE_SCRAP, ScrapParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(REVIVE, ReviveParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(REVIVE_SPARK, ReviveSparkParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SHIELD_WAVE, ShieldWave.Factory::new);
     }
 }
