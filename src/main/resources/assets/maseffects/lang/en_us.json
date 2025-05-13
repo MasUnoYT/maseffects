@@ -14,5 +14,14 @@
   "option.maseffects.totem": "Totem Effect",
   "option.maseffects.totem_tooltip": "Replaces totem particles with custom ones",
   "option.maseffects.mace_shield" : "Mace Shield Block",
-  "option.maseffects.mace_shield_tooltip": "Shielding a Mace attack will create a shockwave"
+  "option.maseffects.mace_shield_tooltip": "Shielding a Mace attack will create a shockwave",
+  "category.maseffects.hitbox" : "Hitbox Config",
+  "option.maseffects.whitelist" : "Ally Whitelist",
+  "option.maseffects.whitelist_tooltip" : "List of names from teammates",
+  "option.maseffects.my_pearl":  "Self Pearl Color",
+  "option.maseffects.my_pearl_tooltip": "Sets the hitbox color from the ender pearl that YOU throw",
+  "option.maseffects.enemy_pearl": "Player Pearl Color",
+  "option.maseffects.enemy_pearl_tooltip": "Sets the hitbox color from the ender pearl that other players throw",
+  "option.maseffects.ally_pearl": "Whitelist Pearl Color",
+  "option.maseffects.ally_pearl_tooltip": "Sets the hitbox color from the ender pearl that players from the whitelist throw"
 }

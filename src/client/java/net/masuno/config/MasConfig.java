@@ -12,8 +12,13 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.ActionResult;
 import org.lwjgl.glfw.GLFW;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MasConfig {
 
@@ -25,6 +30,10 @@ public class MasConfig {
     public static boolean ShieldEffect = true;
     public static boolean ArmorParticles = true;
     public static boolean CustomTotemEffect = true;
+    public static List<String> PearlWhiteList = new ArrayList<>();
+    public static Color MyPearlColor = Color.YELLOW;
+    public static Color EnemyPearlColor = Color.RED;
+    public static Color AllyPearlColor = Color.GREEN;
 
     public static void Register(){
         //Register keybind to open the config menu
@@ -91,6 +100,24 @@ public class MasConfig {
                 .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.totem_tooltip"))
                 .setSaveConsumer(newValue -> CustomTotemEffect = newValue).build());
 
+
+        ConfigCategory hitbox = result.getOrCreateCategory(Text.translatable("category.maseffects.hitbox"));
+
+        hitbox.addEntry(entryBuilder.startStrList(Text.translatable("option.maseffects.whitelist"), PearlWhiteList)
+                .setDefaultValue(new ArrayList<>()).setTooltip(Text.translatable("option.maseffects.whitelist_tooltip"))
+                .setSaveConsumer(newValue -> PearlWhiteList = newValue).build());
+
+        hitbox.addEntry(entryBuilder.startAlphaColorField(Text.translatable("option.maseffects.my_pearl"), MyPearlColor.getRGB())
+                .setDefaultValue(Color.YELLOW.getRGB()).setTooltip(Text.translatable("option.maseffects.my_pearl_tooltip"))
+                .setSaveConsumer(newValue -> MyPearlColor = new Color(newValue)).build());
+
+        hitbox.addEntry(entryBuilder.startAlphaColorField(Text.translatable("option.maseffects.enemy_pearl"), EnemyPearlColor.getRGB())
+                .setDefaultValue(Color.RED.getRGB()).setTooltip(Text.translatable("option.maseffects.enemy_pearl_tooltip"))
+                .setSaveConsumer(newValue -> EnemyPearlColor = new Color(newValue)).build());
+
+        hitbox.addEntry(entryBuilder.startAlphaColorField(Text.translatable("option.maseffects.ally_pearl"), AllyPearlColor.getRGB())
+                .setDefaultValue(Color.GREEN.getRGB()).setTooltip(Text.translatable("option.maseffects.ally_pearl_tooltip"))
+                .setSaveConsumer(newValue -> AllyPearlColor = new Color(newValue)).build());
 
         return result.build();
     }

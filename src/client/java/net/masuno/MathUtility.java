@@ -17,11 +17,14 @@ public class MathUtility {
     }
 
     public static boolean isShielding(PlayerEntity player, PlayerEntity victim){
-        double shield_angle = victim.getYaw();
-        Vec3d attack_dir = player.getPos().subtract(victim.getPos()).normalize();
-        double attack_angle = Math.atan2(attack_dir.x, attack_dir.z);
-        attack_angle = Math.toDegrees(attack_angle);
-        return angleDif(shield_angle,attack_angle) < 90 || angleDif(shield_angle,attack_angle) > 270;
+        if (victim.isBlocking()){
+            double shield_angle = victim.getYaw();
+            Vec3d attack_dir = player.getPos().subtract(victim.getPos()).normalize();
+            double attack_angle = Math.atan2(attack_dir.x, attack_dir.z);
+            attack_angle = Math.toDegrees(attack_angle);
+            return angleDif(shield_angle,attack_angle) < 90 || angleDif(shield_angle,attack_angle) > 270;
+        }
+        return false;
     }
 
     public static double angleDif(double angle1, double angle2){

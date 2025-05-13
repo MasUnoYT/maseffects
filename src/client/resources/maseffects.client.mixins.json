@@ -3,9 +3,10 @@
   "package": "net.masuno.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "HitboxRenderMixin",
+    "MaceMixin",
     "TotemMixin",
-    "TotemParticleMixin",
-    "MaceMixin"
+    "TotemParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
