@@ -2,6 +2,7 @@ package net.masuno.particles;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.masuno.config.MasConfig;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
@@ -27,7 +28,8 @@ public class SmashParticle extends SpriteBillboardParticle {
         this.scaler = (float) xSpeed;
 
         //Sets the base opacity of the shockwave using the ySpeed argument
-        this.alpha = (float) ySpeed;
+        this.alpha_ctrl = (float) ySpeed;
+        this.alpha = Math.clamp(alpha_ctrl * MasConfig.INSTANCE.MaceShockwaveOpacity,0,1);
         this.scale = 0.5F;
         this.maxAge = 40;
         this.velocityMultiplier = 0;
@@ -83,6 +85,7 @@ public class SmashParticle extends SpriteBillboardParticle {
     }
     private float scaler = 1F;
     private float sizer = 1F;
+    private float alpha_ctrl = 1F;
     @Override
     public void tick(){
         super.tick();
@@ -90,10 +93,10 @@ public class SmashParticle extends SpriteBillboardParticle {
         this.scale += scaler * sizer;
         scaler -= 1F / this.maxAge;
 
-        this.alpha -= 1F / this.maxAge;
+        this.alpha_ctrl -= 1F / this.maxAge;
 
         scaler = Math.clamp(scaler,0,1);
-        this.alpha = Math.clamp(alpha,0,1);;
+        this.alpha = Math.clamp(alpha_ctrl * MasConfig.INSTANCE.MaceShockwaveOpacity,0,1);
     }
 
     @Override

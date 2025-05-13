@@ -1,126 +1,101 @@
 package net.masuno.config;
 
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigCategory;
-import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.masuno.events.PlayerAttackManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
-import net.minecraft.util.ActionResult;
-import org.lwjgl.glfw.GLFW;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasConfig {
+@Config(name = "mas_config")
+public class MasConfig implements ConfigData {
 
-    private static KeyBinding ConfigKey;
-    public static boolean MaceShockwave = true;
-    public static float MaceShockwaveSize = 1F;
-    public static boolean MaceSpark = true;
-    public static boolean MaceFlash = true;
-    public static boolean ShieldEffect = true;
-    public static boolean ArmorParticles = true;
-    public static boolean CustomTotemEffect = true;
-    public static List<String> PearlWhiteList = new ArrayList<>();
-    public static Color MyPearlColor = Color.YELLOW;
-    public static Color EnemyPearlColor = Color.RED;
-    public static Color AllyPearlColor = Color.GREEN;
-    public static boolean CustomHitbox = true;
+    @ConfigEntry.Gui.Excluded
+    public static MasConfig INSTANCE;
 
-    public static void Register(){
-        //Register keybind to open the config menu
-        ConfigKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.maseffects.config",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_RIGHT_SHIFT,
-                "category.maseffects"
-        ));
-        //Check for every tick if the key was pressed
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (ConfigKey.wasPressed()) {
-                //Open the config by setting the screen to ConfigScreen
-                Screen configScreen = getConfigScreen();
-                if (MinecraftClient.getInstance().currentScreen != configScreen) MinecraftClient.getInstance().setScreen(configScreen);
-            }
-        });
+    public static void init()
+    {
+        AutoConfig.register(MasConfig.class, JanksonConfigSerializer::new);
+        INSTANCE = AutoConfig.getConfigHolder(MasConfig.class).getConfig();
     }
 
-    //Generate the config screen
-    public static Screen getConfigScreen(){
-        ConfigBuilder result = ConfigBuilder.create()
-            .setParentScreen(MinecraftClient.getInstance().currentScreen)
-            .setTitle(Text.translatable("title.maseffects.config"));
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("If enabled, creates a shockwave effect when slamming with the mace")
+    public boolean MaceShockwave = true;
 
-        ConfigCategory mace = result.getOrCreateCategory(Text.translatable("category.maseffects.mace"));
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("Increases the size of the mace shockwave")
+    public float MaceShockwaveSize = 1F;
 
-        ConfigEntryBuilder entryBuilder = result.entryBuilder();
-        mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.shockwave"),MaceShockwave)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.shockwave_tooltip"))
-                .setSaveConsumer(newValue -> MaceShockwave = newValue).build());
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("Sets the opacity of the mace shockwave")
+    public float MaceShockwaveOpacity = 1F;
 
-        mace.addEntry(entryBuilder.startFloatField(Text.translatable("option.maseffects.shockwave_size"),MaceShockwaveSize)
-                .setDefaultValue(1F).setTooltip(Text.translatable("option.maseffects.shockwave_size_tooltip"))
-                .setSaveConsumer(newValue -> MaceShockwaveSize = newValue).build());
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("Creates spark particles when slamming with the mace")
+    public boolean MaceSpark = true;
 
-        mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.spark"),MaceSpark)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.spark_tooltip"))
-                .setSaveConsumer(newValue -> MaceSpark = newValue).build());
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("Creates flash upon slamming with the mace")
+    public boolean MaceFlash = true;
 
-        mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.flash"),MaceFlash)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.flash_tooltip"))
-                .setSaveConsumer(newValue -> MaceFlash = newValue).build());
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("Creates a small shockwave on a player´s shield when blocking mace attacks")
+    public boolean ShieldEffect = true;
 
-        mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.mace_shield"), ShieldEffect)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.mace_shield_tooltip"))
-                .setSaveConsumer(newValue -> ShieldEffect = newValue).build());
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "mace")
+    @Comment("If enabled spawns armor breaking particles when using the breach enchantment")
+    public boolean ArmorParticles = true;
 
-        mace.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.armor"), ArmorParticles)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.armor_tooltip"))
-                .setSaveConsumer(newValue -> ArmorParticles = newValue).build());
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "default")
+    @Comment("If enabled changes the totem particle effect completely")
+    public boolean CustomTotemEffect = true;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "default")
+    @Comment("Changes the opacity of the totem effect")
+    public float TotemEffectOpacity = 1.0F;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "default")
+    @Comment("Spawns custom death particles when a player dies")
+    public boolean PlayerDeathEffect = true;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "default")
+    @Comment("Makes ender pearls spawn a trail of particles")
+    public boolean PearlTrailParticles = true;
 
 
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "default")
+    @Comment("Changes the opacity of the pearl trail")
+    public float PearlTrailOpacity = 1.0F;
 
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Only players and ender pearls will show their hitboxes, player hitboxes will fade from afar and pearls can have different colors!")
+    public boolean CustomHitbox = true;
 
-        ConfigCategory generic = result.getOrCreateCategory(Text.translatable("category.maseffects.generic"));
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Change the ender pearl hitbox color depending on who threw it")
+    public boolean PearlHitboxColors = true;
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Pearls thrown by these players will be colored green instead of red")
+    public List<String> PearlWhiteList = new ArrayList<>();
 
-        generic.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.totem"), CustomTotemEffect)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.totem_tooltip"))
-                .setSaveConsumer(newValue -> CustomTotemEffect = newValue).build());
-
-
-
-        ConfigCategory hitbox = result.getOrCreateCategory(Text.translatable("category.maseffects.hitbox"));
-
-        hitbox.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.hitbox"), CustomHitbox)
-                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.hitbox_tooltip"))
-                .setSaveConsumer(newValue -> CustomHitbox = newValue).build());
-
-        hitbox.addEntry(entryBuilder.startStrList(Text.translatable("option.maseffects.whitelist"), PearlWhiteList)
-                .setDefaultValue(new ArrayList<>()).setTooltip(Text.translatable("option.maseffects.whitelist_tooltip"))
-                .setSaveConsumer(newValue -> PearlWhiteList = newValue).build());
-
-        hitbox.addEntry(entryBuilder.startAlphaColorField(Text.translatable("option.maseffects.my_pearl"), MyPearlColor.getRGB())
-                .setDefaultValue(Color.YELLOW.getRGB()).setTooltip(Text.translatable("option.maseffects.my_pearl_tooltip"))
-                .setSaveConsumer(newValue -> MyPearlColor = new Color(newValue)).build());
-
-        hitbox.addEntry(entryBuilder.startAlphaColorField(Text.translatable("option.maseffects.enemy_pearl"), EnemyPearlColor.getRGB())
-                .setDefaultValue(Color.RED.getRGB()).setTooltip(Text.translatable("option.maseffects.enemy_pearl_tooltip"))
-                .setSaveConsumer(newValue -> EnemyPearlColor = new Color(newValue)).build());
-
-        hitbox.addEntry(entryBuilder.startAlphaColorField(Text.translatable("option.maseffects.ally_pearl"), AllyPearlColor.getRGB())
-                .setDefaultValue(Color.GREEN.getRGB()).setTooltip(Text.translatable("option.maseffects.ally_pearl_tooltip"))
-                .setSaveConsumer(newValue -> AllyPearlColor = new Color(newValue)).build());
-
-        return result.build();
-    }
 
 }

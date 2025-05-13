@@ -28,6 +28,8 @@ public class PlayerAttackManager {
 
     public static void clientAttack(PlayerEntity player, Entity victim, World world){
         if (world.isClient){
+            if (!MasConfig.INSTANCE.ShieldEffect) return;
+
             //If it doesn't have mace, do nothing
             if (!player.getMainHandStack().isOf(Items.MACE)) return;
 
@@ -42,7 +44,7 @@ public class PlayerAttackManager {
             if (!is_shielding && victim instanceof LivingEntity livingEntity){
                 if (hasEnchantment(player.getMainHandStack(), Enchantments.BREACH)){
                     //If player is using breach, apply armor particles
-                    if (MasConfig.ArmorParticles) ArmorParticles(livingEntity);
+                    if (MasConfig.INSTANCE.ArmorParticles) ArmorParticles(livingEntity);
                 }
             }
         }
@@ -66,13 +68,13 @@ public class PlayerAttackManager {
         Random rand = new Random();
         Vec3d r = new Vec3d(rand.nextFloat(-0.6f,0.6f),rand.nextFloat(-1.2f,1.2f),rand.nextFloat(-0.6f,0.6f));
 
-        if (MasConfig.MaceShockwave){
+        if (MasConfig.INSTANCE.MaceShockwave){
             //Spawn two shock-waves (small and big)
-            world.addParticle(ModParticles.SMASH,x,y,z,0.8d,0.8d,1.5 * MasConfig.MaceShockwaveSize);
-            world.addParticle(ModParticles.SMASH,x,y,z,0.4d,1d,0.35 * MasConfig.MaceShockwaveSize);
+            world.addParticle(ModParticles.SMASH,x,y,z,0.8d,0.8d,1.5 * MasConfig.INSTANCE.MaceShockwaveSize);
+            world.addParticle(ModParticles.SMASH,x,y,z,0.4d,1d,0.35 * MasConfig.INSTANCE.MaceShockwaveSize);
         }
 
-        if (MasConfig.MaceSpark){
+        if (MasConfig.INSTANCE.MaceSpark){
             //Spawn the mace hit sparks
             world.addParticle(ModParticles.FLICK,
                     x + r.x,
@@ -87,7 +89,7 @@ public class PlayerAttackManager {
                     0.2F,0,0);
         }
 
-        if(MasConfig.MaceFlash){
+        if(MasConfig.INSTANCE.MaceFlash){
             //Spawn the mace hit flash
             world.addParticle(ModParticles.FLASH,x,y,z,0,0,0);
         }

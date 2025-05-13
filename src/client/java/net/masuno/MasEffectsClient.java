@@ -12,12 +12,10 @@ public class MasEffectsClient implements ClientModInitializer {
 	public static final String MOD_ID = "maseffects";
 
 	public static final Logger logger = LoggerFactory.getLogger(MOD_ID);
-
 	@Override
 	public void onInitializeClient() {
+		MasConfig.init();
 		logger.debug("Mas Effects is loaded!");
-
-		MasConfig.Register();
 		ModParticles.Register();
 		EventManager.registerEvents();
 	}

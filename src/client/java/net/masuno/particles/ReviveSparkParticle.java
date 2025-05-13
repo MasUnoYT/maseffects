@@ -2,6 +2,7 @@ package net.masuno.particles;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.masuno.config.MasConfig;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -19,7 +20,7 @@ public class ReviveSparkParticle extends SpriteBillboardParticle {
 
         //Sets the length of the particle to be random
         this.maxAge = this.random.nextBetween(30,48);
-        this.alpha = 1f;
+        this.alpha = MasConfig.INSTANCE.TotemEffectOpacity;
         this.scale = 0.1F;
 
         //Sets the velocity of the particle to be random
@@ -67,7 +68,7 @@ public class ReviveSparkParticle extends SpriteBillboardParticle {
             //after it stops, if the target is not null, move the particle towards the entity using the target direction variable
             if (age >= maxAge / 4F && target.getPos().distanceTo(new Vec3d(x,y,z)) < 20){
 
-                alpha = Math.clamp(1F - ((age - (maxAge / 1.5F)) / 20F),0,1);
+                alpha = Math.clamp(1F - ((age - (maxAge / 1.5F)) / 20F),0,1) * MasConfig.INSTANCE.TotemEffectOpacity;
 
                 this.velocityMultiplier = 1F;
                 velocityX = targetDir.x * ((age - 15) * 0.05F);

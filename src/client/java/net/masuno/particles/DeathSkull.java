@@ -28,7 +28,7 @@ public class DeathSkull extends SpriteBillboardParticle {
     @Override
     public void tick(){
         super.tick();
-        this.setSprite(spriteProv.getSprite(Math.clamp(age,0,5),5));
+        this.setSprite(spriteProv.getSprite(Math.clamp(age,0,10),10));
         if (age > 30){
             alpha -= 1F / 30;
         }

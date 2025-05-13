@@ -2,11 +2,9 @@ package net.masuno.events;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.util.ActionResult;
 
 import java.util.List;
@@ -29,6 +27,12 @@ public class EventManager {
             for(AbstractClientPlayerEntity player : players){
                 if (player.deathTime == 1){
                     DeathEvent.runDeath(player);
+                }
+            }
+
+            for(Entity entity : minecraftClient.world.getEntities()){
+                if (entity instanceof EnderPearlEntity end){
+                    EnderPearlTickEvent.tick(end);
                 }
             }
         });

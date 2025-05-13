@@ -22,7 +22,7 @@ public class HitboxRenderMixin {
     @Inject(method = "renderHitbox",at = @At("HEAD"),cancellable = true)
     private static void renderHitbox(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, float red, float green, float blue, CallbackInfo ci){
 
-        if (!MasConfig.CustomHitbox) return;
+        if (!MasConfig.INSTANCE.CustomHitbox) return;
 
         Box box = entity.getBoundingBox().offset(-entity.getX(), -entity.getY(), -entity.getZ());
 
@@ -35,23 +35,22 @@ public class HitboxRenderMixin {
 
         //Hitbox is from pearl
         if (entity instanceof EnderPearlEntity pe){
-            if (pe.getOwner() != null){
-                float distance = (float)Math.clamp((MinecraftClient.getInstance().player.getPos().distanceTo(entity.getPos()) - 5F) / 20F,0D,1D);
+            float distance = (float)Math.clamp((MinecraftClient.getInstance().player.getPos().distanceTo(entity.getPos()) - 10F) / 20F,0D,1D);
+            if (pe.getOwner() != null && !MasConfig.INSTANCE.PearlHitboxColors){
                 if (pe.getOwner().getUuid() == MinecraftClient.getInstance().player.getUuid()){
                     //Pearl is mine
-                    Color c = MasConfig.MyPearlColor;
-                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed() / 255F,c.getGreen()/ 255F,c.getBlue()/ 255F,distance);
+                    WorldRenderer.drawBox(matrices,vertices,box,1F,1F,0,distance);
 
-                }else if(MasConfig.PearlWhiteList.contains(pe.getOwner().getNameForScoreboard())){
+                }else if(MasConfig.INSTANCE.PearlWhiteList.contains(pe.getOwner().getNameForScoreboard())){
                     //Pearl is from whitelisted player
-                    Color c = MasConfig.AllyPearlColor;
-                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed() / 255F,c.getGreen()/ 255F,c.getBlue()/ 255F,distance);
+                    WorldRenderer.drawBox(matrices,vertices,box,0,1F,0,distance);
                 }
                 else {
                     //Pearl is from non-whitelisted player
-                    Color c = MasConfig.EnemyPearlColor;
-                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed() / 255F,c.getGreen()/ 255F,c.getBlue()/ 255F,distance);
+                    WorldRenderer.drawBox(matrices,vertices,box,1F,0,0,distance);
                 }
+            }else {
+                WorldRenderer.drawBox(matrices,vertices,box,1F,1F,0,distance);
             }
         }
 

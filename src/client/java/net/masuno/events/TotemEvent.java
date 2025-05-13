@@ -5,14 +5,14 @@ import net.masuno.particles.ModParticles;
 import net.minecraft.entity.Entity;
 
 public class TotemEvent {
-    //Runs the on totem code
+    //Runs the "on totem used" code
     public static void run(Entity popper) {
-        if (!MasConfig.CustomTotemEffect){
+        if (!MasConfig.INSTANCE.CustomTotemEffect){
             return;
         }
 
         for(int i = 1; i < 18; i++){
-            double scaler = 5F;
+            double scaler = 2.5F;
             popper.getWorld().addParticle(ModParticles.REVIVE,
                     popper.getX(),popper.getY() + popper.getDimensions(popper.getPose()).height() / 2F,popper.getZ(),
                     scaler,popper.getId(),0);

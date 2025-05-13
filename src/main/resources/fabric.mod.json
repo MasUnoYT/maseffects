@@ -3,17 +3,17 @@
 	"id": "maseffects",
 	"version": "${version}",
 	"name": "MasEffects",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A mod focused on enhancing Minecraft PVP visually!",
 	"authors": [
-		"Me!"
+		"MasUN0"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/MasUnoYT/maseffects"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/maseffects/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"main": [
 			"net.masuno.MasEffects"
@@ -22,7 +22,7 @@
 			"net.masuno.MasEffectsClient"
 		],
 		"modmenu": [
-			"net.masuno.config.ModMenuImplementation"
+			"net.masuno.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

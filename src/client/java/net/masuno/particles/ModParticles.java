@@ -44,6 +44,7 @@ public class ModParticles {
 
     public static final SimpleParticleType DEATH_SPARK = FabricParticleTypes.simple();
     public static final SimpleParticleType DEATH_SKULL = FabricParticleTypes.simple();
+    public static final SimpleParticleType ENDER_PEARL_TRAIL = FabricParticleTypes.simple();
 
 
     //Register each particle
@@ -59,6 +60,7 @@ public class ModParticles {
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "shield_wave"), SHIELD_WAVE);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "death_spark"), DEATH_SPARK);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "death_skull"), DEATH_SKULL);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MasEffectsClient.MOD_ID, "pearl_trail"), ENDER_PEARL_TRAIL);
 
         ParticleFactoryRegistry.getInstance().register(SMASH, SmashParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(FLICK, FlickParticle.Factory::new);
@@ -70,5 +72,6 @@ public class ModParticles {
         ParticleFactoryRegistry.getInstance().register(SHIELD_WAVE, ShieldWave.Factory::new);
         ParticleFactoryRegistry.getInstance().register(DEATH_SPARK, DeathSpark.Factory::new);
         ParticleFactoryRegistry.getInstance().register(DEATH_SKULL, DeathSkull.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ENDER_PEARL_TRAIL, EnderPearlTrail.Factory::new);
     }
 }

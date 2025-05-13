@@ -3,6 +3,7 @@ package net.masuno.particles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.masuno.MathUtility;
+import net.masuno.config.MasConfig;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
@@ -37,8 +38,6 @@ public class ReviveParticle extends SpriteBillboardParticle {
         this.rotY = this.random.nextBetween(-180,180);
         this.rotZ = this.random.nextBetween(-180,180);
 
-        this.setSprite(spriteProvider);
-
         //Uses the ySpeed argument to pass the id of the entity in the client.
         Entity ent = clientWorld.getEntityById((int)ySpeed);
 
@@ -58,7 +57,11 @@ public class ReviveParticle extends SpriteBillboardParticle {
         }else {
             this.setColor(0F,1F,0F);
         }
+        this.spriteProv = spriteProvider;
+        this.setSprite(spriteProv.getSprite(age,maxAge));
+
     }
+    private final SpriteProvider spriteProv;
 
     private final double scaler; //Controls the math behind the scale
 
@@ -116,10 +119,12 @@ public class ReviveParticle extends SpriteBillboardParticle {
     public void tick(){
         super.tick();
 
+        this.setSprite(spriteProv.getSprite(age,maxAge));
         //Moves to the entity that used the totem (If it moved)
         if(target != null){
             this.setPos(target.getX(),target.getY() + target.getDimensions(target.getPose()).height() / 2F,target.getZ());
         }
+        if (MasConfig.INSTANCE.TotemEffectOpacity <= 0) return;
 
 
         //Increases the rotY value (used for the orbit rotation effect)
@@ -132,10 +137,10 @@ public class ReviveParticle extends SpriteBillboardParticle {
         QUATERNION = MathUtility.euler((float) rotZ, (float) rotX, (float) -rotZ).mul(QUATERNION);
 
         //Scales the particle up
-        this.scale = this.alpha * (float) this.scaler;
+        this.scale = (this.alpha / MasConfig.INSTANCE.TotemEffectOpacity) * (float) this.scaler;
 
         //Sets the particles opacity
-        this.alpha = Math.clamp((float)Math.sqrt(Math.sin (((double) age / maxAge) * Math.PI))/ 1.2F,0,1F);
+        this.alpha = Math.clamp((float)Math.sqrt(Math.sin (((double) age / maxAge) * Math.PI))/ 1.2F,0,1F) * MasConfig.INSTANCE.TotemEffectOpacity;
 
     }
 
