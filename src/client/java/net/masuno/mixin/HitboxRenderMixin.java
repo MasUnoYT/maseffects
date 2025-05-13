@@ -42,12 +42,12 @@ public class HitboxRenderMixin {
                 }else if(MasConfig.PearlWhiteList.contains(pe.getOwner().getNameForScoreboard())){
                     //Pearl is from whitelisted player
                     Color c = MasConfig.AllyPearlColor;
-                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed(),c.getGreen(),c.getBlue(),distance);
+                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed() / 255F,c.getGreen()/ 255F,c.getBlue()/ 255F,distance);
                 }
                 else {
                     //Pearl is from non-whitelisted player
                     Color c = MasConfig.EnemyPearlColor;
-                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed(),c.getGreen(),c.getBlue(),distance);
+                    WorldRenderer.drawBox(matrices,vertices,box,c.getRed() / 255F,c.getGreen()/ 255F,c.getBlue()/ 255F,distance);
                 }
             }
         }
