@@ -28,7 +28,6 @@ public abstract class TotemMixin extends ClientCommonNetworkHandler implements C
     @Shadow
     private ClientWorld world;
 
-
     //Calls the totem effects whenever a player uses a totem
     @Inject(method = "onEntityStatus",at = @At(value = "HEAD"))
     private void onEntityTotem(EntityStatusS2CPacket packet, CallbackInfo ci){

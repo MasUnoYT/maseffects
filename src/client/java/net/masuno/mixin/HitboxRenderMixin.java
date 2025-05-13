@@ -21,6 +21,9 @@ import java.awt.*;
 public class HitboxRenderMixin {
     @Inject(method = "renderHitbox",at = @At("HEAD"),cancellable = true)
     private static void renderHitbox(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, float red, float green, float blue, CallbackInfo ci){
+
+        if (!MasConfig.CustomHitbox) return;
+
         Box box = entity.getBoundingBox().offset(-entity.getX(), -entity.getY(), -entity.getZ());
 
         //Hitbox is from player

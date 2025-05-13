@@ -34,6 +34,7 @@ public class MasConfig {
     public static Color MyPearlColor = Color.YELLOW;
     public static Color EnemyPearlColor = Color.RED;
     public static Color AllyPearlColor = Color.GREEN;
+    public static boolean CustomHitbox = true;
 
     public static void Register(){
         //Register keybind to open the config menu
@@ -43,12 +44,6 @@ public class MasConfig {
                 GLFW.GLFW_KEY_RIGHT_SHIFT,
                 "category.maseffects"
         ));
-
-        AttackEntityCallback.EVENT.register((playerEntity, world, hand, entity, entityHitResult) -> {
-            PlayerAttackManager.clientAttack(playerEntity,entity,world);
-            return ActionResult.PASS;
-        });
-
         //Check for every tick if the key was pressed
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (ConfigKey.wasPressed()) {
@@ -57,7 +52,6 @@ public class MasConfig {
                 if (MinecraftClient.getInstance().currentScreen != configScreen) MinecraftClient.getInstance().setScreen(configScreen);
             }
         });
-
     }
 
     //Generate the config screen
@@ -94,6 +88,8 @@ public class MasConfig {
                 .setSaveConsumer(newValue -> ArmorParticles = newValue).build());
 
 
+
+
         ConfigCategory generic = result.getOrCreateCategory(Text.translatable("category.maseffects.generic"));
 
         generic.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.totem"), CustomTotemEffect)
@@ -101,7 +97,12 @@ public class MasConfig {
                 .setSaveConsumer(newValue -> CustomTotemEffect = newValue).build());
 
 
+
         ConfigCategory hitbox = result.getOrCreateCategory(Text.translatable("category.maseffects.hitbox"));
+
+        hitbox.addEntry(entryBuilder.startBooleanToggle(Text.translatable("option.maseffects.hitbox"), CustomHitbox)
+                .setDefaultValue(true).setTooltip(Text.translatable("option.maseffects.hitbox_tooltip"))
+                .setSaveConsumer(newValue -> CustomHitbox = newValue).build());
 
         hitbox.addEntry(entryBuilder.startStrList(Text.translatable("option.maseffects.whitelist"), PearlWhiteList)
                 .setDefaultValue(new ArrayList<>()).setTooltip(Text.translatable("option.maseffects.whitelist_tooltip"))
