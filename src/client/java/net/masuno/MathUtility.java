@@ -6,6 +6,8 @@ import net.minecraft.util.math.Vec3d;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import java.awt.*;
+
 public class MathUtility {
     public static Quaternionf euler(float x, float y, float z){
         //TURNS EULER ANGLES TO QUATERNIONS
@@ -44,7 +46,6 @@ public class MathUtility {
         }
         return result;
     }
-
 }
 
 

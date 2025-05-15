@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+import me.shedaniel.math.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +82,7 @@ public class MasConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category(value = "default")
     @Comment("Changes the opacity of the pearl trail")
-    public float PearlTrailOpacity = 1.0F;
+    public float PearlTrailOpacity = 0.5F;
 
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category(value = "hitbox")
@@ -92,10 +93,48 @@ public class MasConfig implements ConfigData {
     @ConfigEntry.Category(value = "hitbox")
     @Comment("Change the ender pearl hitbox color depending on who threw it")
     public boolean PearlHitboxColors = true;
+
     @ConfigEntry.Gui.Tooltip()
     @ConfigEntry.Category(value = "hitbox")
     @Comment("Pearls thrown by these players will be colored green instead of red")
     public List<String> PearlWhiteList = new ArrayList<>();
 
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Color of your own pearl hitbox")
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    public int SelfPearlColor = 0xB3ffff00;
 
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Color of your allies pearl hitboxes")
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    public int AllyPearlColor = 0xB30000ff;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Color of other player's pearl hitboxes")
+    @ConfigEntry.ColorPicker(allowAlpha = true)
+    public int OtherPearlColor = 0xB3ff0000;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Opacity of other mob's hitboxes")
+    public float MobPearlHitboxOpacity = 0.3F;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Opacity of player's hitboxes")
+    public float PlayerPearlHitboxOpacity = 0.8F;
+
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Distance in blocks where the hitbox starts to fade for mobs and players")
+    public float HitboxFadeDistance = 15F;
+
+    @ConfigEntry.Gui.Tooltip()
+    @ConfigEntry.Category(value = "hitbox")
+    @Comment("Distance in blocks where the hitbox starts to appear for pearls and wind charges")
+    public float HitboxProjectileFadeDistance = 5F;
 }

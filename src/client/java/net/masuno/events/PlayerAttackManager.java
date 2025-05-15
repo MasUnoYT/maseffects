@@ -29,7 +29,6 @@ public class PlayerAttackManager {
     public static void clientAttack(PlayerEntity player, Entity victim, World world){
         if (world.isClient){
             if (!MasConfig.INSTANCE.ShieldEffect) return;
-
             //If it doesn't have mace, do nothing
             if (!player.getMainHandStack().isOf(Items.MACE)) return;
 
@@ -42,7 +41,7 @@ public class PlayerAttackManager {
                 }
             }
             if (!is_shielding && victim instanceof LivingEntity livingEntity){
-                if (hasEnchantment(player.getMainHandStack(), Enchantments.BREACH)){
+                if (hasEnchantment(player.getMainHandStack(), Enchantments.BREACH) && player.fallDistance > 1.5F){
                     //If player is using breach, apply armor particles
                     if (MasConfig.INSTANCE.ArmorParticles) ArmorParticles(livingEntity);
                 }
